@@ -1,5 +1,5 @@
 //
-//  Products.swift
+//  Help.swift
 //  Amaro
 //
 //  Created by Diego Cavalcante Costa on 09/01/17.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class Products: NSObject {
-
+class Help: NSObject {
+    static let messageError = "Could not complete the request, please, try again"
 }
