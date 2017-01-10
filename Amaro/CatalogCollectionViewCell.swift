@@ -30,7 +30,7 @@ class CatalogCollectionViewCell: UICollectionViewCell {
         guard let foto = product.image, product.image != "" else { return self.imageProduct.image = Help.imagePlaceholder}
         self.imageProduct.setImageWith(URL(string : foto)!, placeholderImage: Help.imagePlaceholder)
         
-        guard let name = product.name else {return nameProduct.text = ""}
+        guard let name = product.name else { return nameProduct.text = "" }
         nameProduct.text = name
     }
 }
