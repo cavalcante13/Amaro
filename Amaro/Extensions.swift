@@ -8,21 +8,17 @@
 
 import UIKit
 
-public enum UITableViewState : Int {
+public enum UITableViewStatus : Int {
     case loading
     case loaded
     case empty
     case error
 }
-var tableState : UITableViewState = UITableViewState(rawValue: 0)!
+var tableStatus : UITableViewStatus = UITableViewStatus(rawValue: 0)!
 extension UITableView {
     var status : UITableViewStatus {
-        get {
-            return tableState
-        }
-        set(newValue) {
-            tableState = newValue
-        }
+        get { return tableStatus }
+        set(newValue) { tableStatus = newValue }
     }
     
     func register<T: UITableViewCell>(class: T.Type) where T:ReusableView {
@@ -34,14 +30,16 @@ extension UITableView {
             else { fatalError("Could not dequeue cell with identifier:\(T.reuseIdentifier)")}
         return cell
     }
-    
-    func dequeueErrorReusableCell<T:UITableViewCell>(closure : @escaping ((Void)-> (Void)))-> T where T:ReusableView {
-        let t = T.dequeueErrorReusableCell
-        t.tryAgainAction = { closure() }
-        return t as! T
+}
+extension UICollectionView {
+    func register<T: UICollectionViewCell>(class: T.Type) where T:ReusableView {
+        register(T.self, forCellWithReuseIdentifier: T.reuseIdentifier)
     }
-    func dequeueEmptyReusableCell<T:UITableViewCell>()-> T where T:ReusableView {
-        return T.dequeueEmptyReusableCell as! T
+    
+    func dequeueReusableCell<T:UICollectionViewCell>(forIndexPath indexPath: IndexPath)-> T where T:ReusableView {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: T.reuseIdentifier, for: indexPath) as? T
+            else { fatalError("Could not dequeue cell with identifier:\(T.reuseIdentifier)")}
+        return cell
     }
 }
 protocol ReusableView: class {}
@@ -49,11 +47,6 @@ extension ReusableView where Self : UIView {
     static var reuseIdentifier : String {
         return String(describing: self)
     }
-//    static var dequeueErrorReusableCell : ErrorTableViewCell {
-//        return ErrorTableViewCell(style: .default, reuseIdentifier: UITableViewCell.reuseIdentifier)
-//    }
-//    static var dequeueEmptyReusableCell : EmptyTableViewCell {
-//        return EmptyTableViewCell(style: .default, reuseIdentifier: UITableViewCell.reuseIdentifier)
-//    }
 }
-extension UITableViewCell : ReusableView{}
+extension UITableViewCell       : ReusableView{}
+extension UICollectionViewCell  : ReusableView{}

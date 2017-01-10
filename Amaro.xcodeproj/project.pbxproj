@@ -24,7 +24,7 @@
 		C3A571791E2461C90035E52E /* Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A571781E2461C90035E52E /* Convert.swift */; };
 		C3A5717B1E2465640035E52E /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A5717A1E2465640035E52E /* Product.swift */; };
 		C3A5717D1E2471670035E52E /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A5717C1E2471670035E52E /* Help.swift */; };
-		C3A5717F1E2478D70035E52E /* CatalogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A5717E1E2478D70035E52E /* CatalogTableViewCell.swift */; };
+		E5963F931E250DC000E286B0 /* CatalogCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5963F921E250DC000E286B0 /* CatalogCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +61,7 @@
 		C3A571781E2461C90035E52E /* Convert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Convert.swift; sourceTree = "<group>"; };
 		C3A5717A1E2465640035E52E /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		C3A5717C1E2471670035E52E /* Help.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
-		C3A5717E1E2478D70035E52E /* CatalogTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogTableViewCell.swift; sourceTree = "<group>"; };
+		E5963F921E250DC000E286B0 /* CatalogCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogCollectionViewCell.swift; sourceTree = "<group>"; };
 		FAA5413BD530F5C8CB885D83 /* Pods-AmaroTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmaroTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AmaroTests/Pods-AmaroTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FC27517C955ED5724EE4AA1F /* Pods-Amaro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Amaro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Amaro/Pods-Amaro.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,7 +157,7 @@
 				C3A571641E24520B0035E52E /* CatalogViewController.swift */,
 				C3A571661E2452E30035E52E /* CatalogModel.swift */,
 				C3A571761E245CDD0035E52E /* CatalogService.swift */,
-				C3A5717E1E2478D70035E52E /* CatalogTableViewCell.swift */,
+				E5963F921E250DC000E286B0 /* CatalogCollectionViewCell.swift */,
 			);
 			name = Catalog;
 			sourceTree = "<group>";
@@ -414,12 +414,12 @@
 				C3A571651E24520B0035E52E /* CatalogViewController.swift in Sources */,
 				C3A571791E2461C90035E52E /* Convert.swift in Sources */,
 				C3A571721E2455E20035E52E /* Extensions.swift in Sources */,
+				E5963F931E250DC000E286B0 /* CatalogCollectionViewCell.swift in Sources */,
 				C3A571671E2452E30035E52E /* CatalogModel.swift in Sources */,
 				C3A571771E245CDD0035E52E /* CatalogService.swift in Sources */,
 				C3A5716A1E2454BC0035E52E /* CartViewController.swift in Sources */,
 				C3A5717B1E2465640035E52E /* Product.swift in Sources */,
 				C3A5716C1E2454C70035E52E /* CartModel.swift in Sources */,
-				C3A5717F1E2478D70035E52E /* CatalogTableViewCell.swift in Sources */,
 				C3A571431E244FC00035E52E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

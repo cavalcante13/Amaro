@@ -9,8 +9,7 @@
 import UIKit
 
 class CatalogViewController: UIViewController {
-    @IBOutlet weak var tableView : UITableView!
-    
+    @IBOutlet weak var collectionView : UICollectionView!
     
     fileprivate lazy var model : CatalogModel = {
         return CatalogModel(delegate : self)
@@ -18,7 +17,12 @@ class CatalogViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
         model.getJson()
+        
+    }
+    private func setup() {
+        self.navigationItem.titleView = Help.logoTitleView
     }
 }
 extension CatalogViewController : CatalogModelDelegate {
@@ -28,31 +32,36 @@ extension CatalogViewController : CatalogModelDelegate {
         }else {
             
         }
+        collectionView.reloadData()
     }
 }
-extension CatalogViewController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+extension CatalogViewController : UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 4
     }
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 4
     }
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (self.collectionView.frame.size.width / 2) - 6, height: 286)
     }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 4)
     }
 }
-extension CatalogViewController : UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+extension CatalogViewController : UICollectionViewDelegate {
+    
+}
+extension CatalogViewController : UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return model.products.count
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as CatalogTableViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as CatalogCollectionViewCell
+        cell.populate(with: model.products[indexPath.row])
         return cell
     }
 }
