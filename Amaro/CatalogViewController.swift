@@ -50,7 +50,20 @@ extension CatalogViewController : UICollectionViewDelegateFlowLayout {
     }
 }
 extension CatalogViewController : UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if !model.products.isEmpty {
+            performSegue(withIdentifier: String(describing : CatalogDetailViewController.self), sender: model.products[indexPath.row])
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is CatalogDetailViewController {
+            let destination = segue.destination as! CatalogDetailViewController
+            let model = CatalogDetailModel(delegate: destination)
+            model.product = sender as! Product
+            destination.model = model
+        }
+    }
 }
 extension CatalogViewController : UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {

@@ -45,9 +45,8 @@ class Convert: NSObject {
             product.on_sale = on_sale
         }
         if let sizes = result["sizes"] as? NSArray {
-            for size in sizes {
-                product.sizes.append(convertToSize(size as! NSDictionary))
-            }
+            let avaliables = sizes.filtered(using: NSPredicate(format: "available = %d", 1))
+            avaliables.forEach({product.sizes.append(convertToSize($0 as! NSDictionary))})
         }
         return product
     }
