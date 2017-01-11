@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="h5W-bP-m21">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="h5W-bP-m21">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -181,10 +180,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lV7-95-0er">
-                        <rightBarButtonItems>
-                            <barButtonItem image="cart" id="94r-7u-f1r"/>
-                            <barButtonItem image="search" id="3iu-MI-9pa"/>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="cart" id="94r-7u-f1r"/>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="oIE-wI-Vnh" id="bn0-tb-KIL"/>
@@ -454,7 +450,6 @@
         <image name="cart" width="24" height="24"/>
         <image name="like" width="30" height="27"/>
         <image name="on_sale_tag" width="100" height="100"/>
-        <image name="search" width="24" height="24"/>
         <image name="size_g" width="99" height="100"/>
     </resources>
 </document>

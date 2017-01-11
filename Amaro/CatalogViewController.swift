@@ -11,6 +11,14 @@ import UIKit
 class CatalogViewController: UIViewController {
     @IBOutlet weak var collectionView : UICollectionView!
     
+    fileprivate lazy var searchBar : UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.placeholder = "Pesquisar por nome do produto"
+        searchBar.enablesReturnKeyAutomatically = false
+        return searchBar
+    }()
+    
     fileprivate lazy var model : CatalogModel = {
         return CatalogModel(delegate : self)
     }()
@@ -22,7 +30,23 @@ class CatalogViewController: UIViewController {
         
     }
     private func setup() {
-        self.navigationItem.titleView = Help.logoTitleView
+        navigationItem.titleView = searchBar
+    }
+}
+extension CatalogViewController : UISearchBarDelegate {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if searchBar.text!.isEmpty {
+            model.getJson()
+            searchBar.resignFirstResponder()
+        }
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        model.searchProduct(with: searchBar.text ?? "")
+        searchBar.resignFirstResponder()
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 extension CatalogViewController : CatalogModelDelegate {
@@ -32,6 +56,8 @@ extension CatalogViewController : CatalogModelDelegate {
         }else {
             
         }
+        print(model.products)
+        print(model.products.count)
         collectionView.reloadData()
     }
 }
