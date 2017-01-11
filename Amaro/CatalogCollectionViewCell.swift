@@ -67,18 +67,5 @@ class CatalogCollectionViewCell: UICollectionViewCell {
         if let sizeStr = product.sizeStr {
             self.sizes.text = sizeStr
         }
-        
-//        for s in product.sizes {
-//            self.sizes.text? += "\(s.size!), "
-//            print(s.size!)
-//        }
-        
-//        product.sizes.forEach({(s) in
-//            self.sizes.text? += "\(s.size!), "
-//            print(s.size!)
-//        })
-        
-//        sizes.text = product.sizes.map(//        sizes.text = join(" | ", map(actions, { $0.name }))
-//        types.joined(separator : ",")
     }
 }

@@ -27,7 +27,7 @@ class CartModel: NSObject {
     }
     
     func getProductsFromCart() {
-        let products = self.realm.objects(Product.self).filter("isOnChart ==%s", 1)
+        let products = self.realm.objects(Product.self).filter("isOnChart ==%s", 1).sorted(byProperty: "name", ascending: true)
         if products.count > 0 {
             products.forEach({(product) in
                 self.products.append(product)

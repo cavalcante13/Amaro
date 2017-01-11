@@ -40,7 +40,5 @@ class CartTableViewCell: UITableViewCell {
         if let actualPrice = product.actual_price {
             self.actualPrice.text = actualPrice
         }
-
-        print(product)
     }
 }

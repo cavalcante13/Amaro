@@ -21,9 +21,6 @@ class CartViewController: UIViewController {
         super.viewDidLoad()
         setup()
         model.getProductsFromCart()
-        
-        
-        print(Double(model.products[0].actual_price!)!)
     }
     
     private func setup() {
