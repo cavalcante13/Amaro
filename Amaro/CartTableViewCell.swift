@@ -9,21 +9,38 @@
 import UIKit
 
 class CartTableViewCell: UITableViewCell {
-    @IBOutlet weak var imageProduct: UIImageView!
-    @IBOutlet weak var nameProduct: UILabel!
-    @IBOutlet weak var color: UILabel!
-    @IBOutlet weak var installments: UILabel!
-    @IBOutlet weak var actualPrice: UILabel!
+    @IBOutlet weak var imageProduct : UIImageView!
+    @IBOutlet weak var nameProduct  : UILabel!
+    @IBOutlet weak var color        : UILabel!
+    @IBOutlet weak var installments : UILabel!
+    @IBOutlet weak var actualPrice  : UILabel!
 
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
     }
 
     func populate(with product : Product) {
-        guard let foto = product.image, product.image != "" else { return self.imageProduct.image = Help.imagePlaceholder}
-        self.imageProduct.setImageWith(URL(string : foto)!, placeholderImage: Help.imagePlaceholder)
+        if let foto = product.image, product.image != "" {
+            self.imageProduct.setImageWith(URL(string : foto)!, placeholderImage: Help.imagePlaceholder)
+        }else {
+            self.imageProduct.image = Help.imagePlaceholder
+        }
         
-        guard let name = product.name else { return nameProduct.text = "" }
-        nameProduct.text = name
+        if let name = product.name {
+            nameProduct.text = name
+        }
+        if let color = product.color {
+            self.color.text = color
+        }
+        if let installments = product.installments {
+            self.installments.text = installments
+        }
+        if let actualPrice = product.actual_price {
+            self.actualPrice.text = actualPrice
+        }
+
+        print(product)
     }
 }

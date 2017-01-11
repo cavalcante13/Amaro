@@ -19,6 +19,7 @@ class CartModel: NSObject {
         return try! Realm()
     }()
     
+    
     var products : [Product] = [Product]()
     
     init(delegate : CartModelDelegate) {
@@ -26,13 +27,27 @@ class CartModel: NSObject {
     }
     
     func getProductsFromCart() {
-        let products = self.realm.objects(Product.self)
+        let products = self.realm.objects(Product.self).filter("isOnChart ==%s", 1)
         if products.count > 0 {
             products.forEach({(product) in
                 self.products.append(product)
             })
             self.delegate?.getProductsFromCart()
         }
+    }
+    
+    func getTotalFromChart() {
+        
+    }
+    
+    func removeProductFromChart(_ product : Product) {
+        try! realm.write {
+            product.isOnChart = false
+            self.realm.add(product)
+        }
+        self.products.removeAll()
+        self.getProductsFromCart()
+        self.delegate?.getProductsFromCart()
     }
 }
 

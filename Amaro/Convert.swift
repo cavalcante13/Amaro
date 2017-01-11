@@ -35,6 +35,9 @@ class Convert: NSObject {
         if let actual_price = result["actual_price"] as? String {
             product.actual_price = actual_price
         }
+        if let installments = result["installments"] as? String {
+            product.installments = installments
+        }
         if let discount_percentage = result["discount_percentage"] as? String {
             product.discount_percentage = discount_percentage
         }
@@ -45,8 +48,15 @@ class Convert: NSObject {
             product.on_sale = on_sale
         }
         if let sizes = result["sizes"] as? NSArray {
-            let avaliables = sizes.filtered(using: NSPredicate(format: "available = %d", 1))
-            avaliables.forEach({product.sizes.append(convertToSize($0 as! NSDictionary))})
+            let avaliables = sizes.filtered(using: NSPredicate(format: "available = %d", 1)) as! [NSDictionary]
+            avaliables.forEach({ product.sizes.append(convertToSize($0))})
+            
+            // product.sizes is Realm List not contain joined function
+            var sizes : [String] = [String]()
+            product.sizes.forEach({(size) in
+                sizes.append(size.size!)
+            })
+            product.sizeStr = sizes.joined(separator: ", ")
         }
         return product
     }
@@ -62,6 +72,7 @@ class Convert: NSObject {
         if let sku = result["sku"] as? String {
             size.sku = sku
         }
+        
         return size
     }
 }

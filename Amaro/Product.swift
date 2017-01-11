@@ -20,6 +20,7 @@ class Product: Object {
     dynamic var discount_percentage : String?
     dynamic var installments    : String?
     dynamic var image           : String?
+    dynamic var sizeStr         : String?
     dynamic var on_sale         = false
     dynamic var isOnChart       = false
     dynamic var liked           = false

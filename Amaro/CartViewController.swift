@@ -10,7 +10,7 @@ import UIKit
 
 class CartViewController: UIViewController {
     @IBOutlet weak var tableView : UITableView!
-    
+    @IBOutlet weak var total: UILabel!
     
     fileprivate lazy var model : CartModel = {
         return CartModel(delegate: self)
@@ -21,10 +21,21 @@ class CartViewController: UIViewController {
         super.viewDidLoad()
         setup()
         model.getProductsFromCart()
+        
+        
+        print(Double(model.products[0].actual_price!)!)
     }
+    
     private func setup() {
         self.navigationItem.titleView = Help.logoTitleView
+        self.navigationItem.rightBarButtonItem = self.editButtonItem;
+        self.tableView.tableHeaderView = nil
         self.tableView.tableFooterView = nil
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: true)
     }
 }
 extension CartViewController : CartModelDelegate {
@@ -33,7 +44,18 @@ extension CartViewController : CartModelDelegate {
     }
 }
 extension CartViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return model.products.isEmpty ? false : true
+    }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            model.removeProductFromChart(model.products[indexPath.row])
+        default:
+            break
+        }
+    }
 }
 extension CartViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {

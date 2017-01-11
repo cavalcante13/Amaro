@@ -13,6 +13,17 @@ class CatalogCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageProduct: UIImageView!
     @IBOutlet weak var nameProduct: UILabel!
     
+    @IBOutlet weak var discountView: UIView!
+    @IBOutlet weak var discount: UILabel!
+    
+    @IBOutlet weak var regularPriceStackView: UIStackView!
+    @IBOutlet weak var regularPrice: UILabel!
+    @IBOutlet weak var actualPriceStackView: UIStackView!
+    @IBOutlet weak var actualPrice: UILabel!
+    
+    @IBOutlet weak var sizes: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
@@ -27,10 +38,47 @@ class CatalogCollectionViewCell: UICollectionViewCell {
     }
     
     func populate(with product : Product) {
-        guard let foto = product.image, product.image != "" else { return self.imageProduct.image = Help.imagePlaceholder}
-        self.imageProduct.setImageWith(URL(string : foto)!, placeholderImage: Help.imagePlaceholder)
+        if let foto = product.image, product.image != "" {
+            self.imageProduct.setImageWith(URL(string : foto)!, placeholderImage: Help.imagePlaceholder)
+        }else {
+            self.imageProduct.image = Help.imagePlaceholder
+        }
         
-        guard let name = product.name else { return nameProduct.text = "" }
-        nameProduct.text = name
+        if let name = product.name {
+            nameProduct.text = name
+        }
+        
+        if product.discount_percentage != ""{
+            discountView.isHidden = false
+            discount.text = product.discount_percentage
+            
+            regularPriceStackView.isHidden = false
+            regularPrice.text = "de " + product.regular_price!
+        }else {
+            discountView.isHidden = true
+            regularPriceStackView.isHidden = true
+            regularPrice.text = ""
+        }
+        
+        if let actual = product.actual_price {
+            self.actualPrice.text = "por " + actual
+        }
+        
+        if let sizeStr = product.sizeStr {
+            self.sizes.text = sizeStr
+        }
+        
+//        for s in product.sizes {
+//            self.sizes.text? += "\(s.size!), "
+//            print(s.size!)
+//        }
+        
+//        product.sizes.forEach({(s) in
+//            self.sizes.text? += "\(s.size!), "
+//            print(s.size!)
+//        })
+        
+//        sizes.text = product.sizes.map(//        sizes.text = join(" | ", map(actions, { $0.name }))
+//        types.joined(separator : ",")
     }
 }

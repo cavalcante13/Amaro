@@ -49,6 +49,8 @@ class CatalogDetailViewController: UIViewController {
     func setupProduct() {
         model.getProductFromRealm()
         cartButton.isSelected = model.productIsOnChart
+        
+        print(model.product.sizes)
     }
     
     @IBAction func addProductToCart(_ sender: UIButton) {
