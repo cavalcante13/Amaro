@@ -282,7 +282,6 @@
 				TargetAttributes = {
 					C3A5713E1E244FC00035E52E = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = RM27D928R2;
 						ProvisioningStyle = Automatic;
 					};
 					C3A571521E244FC10035E52E = {
@@ -582,7 +581,7 @@
 			baseConfigurationReference = FC27517C955ED5724EE4AA1F /* Pods-Amaro.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = RM27D928R2;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Amaro/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.diego.cavalcante.Amaro;
@@ -596,7 +595,7 @@
 			baseConfigurationReference = 98E8E2343754CFF09D607F00 /* Pods-Amaro.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = RM27D928R2;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Amaro/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.diego.cavalcante.Amaro;

@@ -40,7 +40,10 @@ class CatalogModel: NSObject {
             self.delegate?.model(jsonResponse: self, error: nil)
         }
     }
-    func getJson() {
+    func getJson(_ force : Bool = false) {
+        if force {
+            products.removeAll()
+        }
         CatalogService.getJson(resource: "products") { (result) -> (Void) in
             if let result = result as? NSDictionary {
                 if let products = result["products"] as? NSArray {

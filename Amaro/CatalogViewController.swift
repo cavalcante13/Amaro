@@ -33,10 +33,9 @@ class CatalogViewController: UIViewController {
     }
     private func setup() {
         navigationItem.titleView = searchBar
-//        filterBarButton.imageInsets = UIEdgeInsetsMake(0.0, 20, 0, 0)
     }
     
-    @IBAction func filterAction(_ sender: Any) {
+    @IBAction func filterAction(_ sender: UIButton) {
         let alert = UIAlertController(title: "Ordenar por: ", message: nil, preferredStyle: .actionSheet)
         let okAction = UIAlertAction(title: "Em promoção", style: .default, handler: {(action) in
             self.model.searchProductOnSale()
