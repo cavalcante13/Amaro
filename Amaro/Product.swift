@@ -21,11 +21,10 @@ class Product: Object {
     dynamic var installments    : String?
     dynamic var image           : String?
     dynamic var on_sale         = false
-    dynamic var sizes           = [Size]()
+    dynamic var isOnChart       = false
+    dynamic var liked           = false
+    let         sizes           = List<Size>()
     
-    override static func ignoredProperties() -> [String] {
-        return ["sizes"]
-    }
 }
 class Size : Object {
     dynamic var available = false

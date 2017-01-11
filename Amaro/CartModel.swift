@@ -8,6 +8,21 @@
 
 import UIKit
 
-class CartModel: NSObject {
-
+protocol CartModelDelegate : class {
+    func getProductsFromCart()
 }
+class CartModel: NSObject {
+    weak var delegate : CartModelDelegate?
+    
+    var products : [Product] = [Product]()
+    
+    init(delegate : CartModelDelegate) {
+        self.delegate = delegate
+    }
+    
+    func getProductsFromCart() {
+        
+    }
+}
+
+

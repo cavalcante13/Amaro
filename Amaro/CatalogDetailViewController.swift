@@ -10,7 +10,6 @@ import UIKit
 
 class CatalogDetailViewController: UIViewController {
     @IBOutlet weak var collectionView : UICollectionView!
-    
     @IBOutlet weak var imageProduct: UIImageView!
     @IBOutlet weak var nameProduct: UILabel!
     
@@ -20,10 +19,15 @@ class CatalogDetailViewController: UIViewController {
         return CatalogDetailModel(delegate : self)
     }()
     
+    var heightCollectionView : CGFloat {
+        return self.collectionView.collectionViewLayout.collectionViewContentSize.height + 6
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupHeightCollectionView()
+        setupProduct()
         collectionView.reloadData()
     }
 
@@ -34,20 +38,33 @@ class CatalogDetailViewController: UIViewController {
         guard let name = model.product.name else { return nameProduct.text = "" }
         nameProduct.text = name
     }
+    
     private func setupHeightCollectionView() {
         collectionView.constraints.forEach({(constraint) in
             if constraint.identifier == "height" {
-                constraint.constant = self.collectionView.collectionViewLayout.collectionViewContentSize.height + 6
+                constraint.constant = heightCollectionView
             }
         })
     }
+    func setupProduct() {
+        model.getProductFromRealm()
+        cartButton.isSelected = model.productIsOnChart
+    }
+    
     @IBAction func addProductToCart(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
         self.model.addProductToCart(self.model.product)
+        sender.isSelected = model.productIsOnChart
+        if model.productIsOnChart {
+            Help.message(self, message: "Produto adicionado ao carrinho")
+        }else {
+            Help.message(self, message: "Produto removido do carrinho")
+        }
     }
 }
 extension CatalogDetailViewController : CatalogDetailModelDelegate {
-    
+    func productFromCart(_ isOnCart : Bool) {
+        self.cartButton.isSelected = isOnCart
+    }
 }
 extension CatalogDetailViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -61,13 +78,6 @@ extension CatalogDetailViewController : UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 4)
-    }
-}
-extension CatalogDetailViewController : UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if !model.product.sizes.isEmpty {
-            
-        }
     }
 }
 extension CatalogDetailViewController : UICollectionViewDataSource {

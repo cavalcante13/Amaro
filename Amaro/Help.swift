@@ -18,4 +18,11 @@ class Help: NSObject {
         logoTitleView.contentMode = UIViewContentMode.scaleAspectFit
         return logoTitleView
     }()
+    
+    static func message(_ viewController : UIViewController, message : String) {
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: .actionSheet)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(okAction)
+        viewController.present(alert, animated: true, completion: nil)
+    }
 }
