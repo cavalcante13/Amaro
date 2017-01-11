@@ -9,16 +9,21 @@
 import UIKit
 
 class CartTableViewCell: UITableViewCell {
+    @IBOutlet weak var imageProduct: UIImageView!
+    @IBOutlet weak var nameProduct: UILabel!
+    @IBOutlet weak var color: UILabel!
+    @IBOutlet weak var installments: UILabel!
+    @IBOutlet weak var actualPrice: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func populate(with product : Product) {
+        guard let foto = product.image, product.image != "" else { return self.imageProduct.image = Help.imagePlaceholder}
+        self.imageProduct.setImageWith(URL(string : foto)!, placeholderImage: Help.imagePlaceholder)
+        
+        guard let name = product.name else { return nameProduct.text = "" }
+        nameProduct.text = name
     }
-
 }

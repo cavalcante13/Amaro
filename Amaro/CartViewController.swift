@@ -19,7 +19,12 @@ class CartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
         model.getProductsFromCart()
+    }
+    private func setup() {
+        self.navigationItem.titleView = Help.logoTitleView
+        self.tableView.tableFooterView = nil
     }
 }
 extension CartViewController : CartModelDelegate {
@@ -40,7 +45,8 @@ extension CartViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as CartTableViewCell
+        cell.populate(with: model.products[indexPath.row])
         return cell
     }
 }
