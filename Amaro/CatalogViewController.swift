@@ -51,13 +51,6 @@ extension CatalogViewController : UISearchBarDelegate {
 }
 extension CatalogViewController : CatalogModelDelegate {
     func model(jsonResponse model : CatalogModel, error : NSError?) {
-        if error == nil {
-            
-        }else {
-            
-        }
-        print(model.products)
-        print(model.products.count)
         collectionView.reloadData()
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol CatalogDetailModelDelegate : class {
     
@@ -18,5 +19,9 @@ class CatalogDetailModel: NSObject {
     
     init(delegate : CatalogDetailModelDelegate) {
         self.delegate = delegate
+    }
+    
+    func addProductToCart(_ product : Product) {
+        
     }
 }

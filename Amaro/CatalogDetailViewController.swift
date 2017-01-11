@@ -14,6 +14,8 @@ class CatalogDetailViewController: UIViewController {
     @IBOutlet weak var imageProduct: UIImageView!
     @IBOutlet weak var nameProduct: UILabel!
     
+    @IBOutlet weak var cartButton: UIButton!
+    
     open lazy var model : CatalogDetailModel = {
         return CatalogDetailModel(delegate : self)
     }()
@@ -21,15 +23,27 @@ class CatalogDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupHeightCollectionView()
         collectionView.reloadData()
     }
-    
+
     private func setup() {
         guard let foto = model.product.image, model.product.image != "" else { return self.imageProduct.image = Help.imagePlaceholder}
         self.imageProduct.setImageWith(URL(string : foto)!, placeholderImage: Help.imagePlaceholder)
         
         guard let name = model.product.name else { return nameProduct.text = "" }
         nameProduct.text = name
+    }
+    private func setupHeightCollectionView() {
+        collectionView.constraints.forEach({(constraint) in
+            if constraint.identifier == "height" {
+                constraint.constant = self.collectionView.collectionViewLayout.collectionViewContentSize.height + 6
+            }
+        })
+    }
+    @IBAction func addProductToCart(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        self.model.addProductToCart(self.model.product)
     }
 }
 extension CatalogDetailViewController : CatalogDetailModelDelegate {
@@ -47,6 +61,13 @@ extension CatalogDetailViewController : UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 4)
+    }
+}
+extension CatalogDetailViewController : UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if !model.product.sizes.isEmpty {
+            
+        }
     }
 }
 extension CatalogDetailViewController : UICollectionViewDataSource {
