@@ -21,12 +21,13 @@ class CatalogDetailModel: NSObject {
     var product : Product!
     
     var productIsOnChart : Bool {
-        get {
-            return product.isOnChart
-        }
-        set(newValue) {
-            product.isOnChart = newValue
-        }
+        get { return product.isOnChart }
+        set(newValue) { product.isOnChart = newValue }
+    }
+    
+    var productLiked : Bool {
+        get { return product.liked }
+        set(newValue) { product.liked = newValue }
     }
     
     init(delegate : CatalogDetailModelDelegate) {
@@ -43,6 +44,7 @@ class CatalogDetailModel: NSObject {
     func addProductToCart(_ product : Product) {
         try! self.realm.write {
             self.productIsOnChart = !productIsOnChart
+            self.productLiked     = !productLiked
             self.realm.add(self.product)
         }
     }

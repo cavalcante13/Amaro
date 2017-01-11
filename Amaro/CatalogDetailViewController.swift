@@ -23,6 +23,7 @@ class CatalogDetailViewController: UIViewController {
     @IBOutlet weak var likePopImageView: UIImageView!
     
     @IBOutlet weak var cartButton: UIButton!
+    @IBOutlet weak var likeProduct: UIButton!
     
     fileprivate lazy var doubleTap : UITapGestureRecognizer = {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(CatalogDetailViewController.doubleTapAction))
@@ -79,17 +80,27 @@ class CatalogDetailViewController: UIViewController {
     }
     func setupProduct() {
         model.getProductFromRealm()
-        cartButton.isSelected = model.productIsOnChart
+        cartButton.isSelected   = model.productIsOnChart
+        likeProduct.isSelected  = model.productLiked
     }
     
     @IBAction func addProductToCart(_ sender: UIButton) {
-        self.model.addProductToCart(self.model.product)
-        sender.isSelected = model.productIsOnChart
+        model.addProductToCart(self.model.product)
+        cartButton.isSelected = model.productIsOnChart
         if model.productIsOnChart {
             Help.message(self, message: "Produto adicionado ao carrinho")
         }else {
             Help.message(self, message: "Produto removido do carrinho")
         }
+    }
+    
+    @IBAction func likeProduct(_ sender: Any) {
+        model.addProductToCart(self.model.product)
+        likeProduct.isSelected  = model.productLiked
+        performPopAnimation()
+    }
+    func doubleTapAction() {
+        self.likeProduct(self.likeProduct)
     }
 }
 extension CatalogDetailViewController : CatalogDetailModelDelegate {
@@ -125,10 +136,6 @@ extension CatalogDetailViewController : UICollectionViewDataSource {
     }
 }
 extension CatalogDetailViewController {
-    func doubleTapAction() {
-        self.model.addProductToCart(self.model.product)
-        performPopAnimation()
-    }
     
     fileprivate func performPopAnimation() {
         prepareForPop()

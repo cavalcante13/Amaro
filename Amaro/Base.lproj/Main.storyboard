@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -193,14 +194,22 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lV7-95-0er">
-                        <barButtonItem key="rightBarButtonItem" image="cart" id="94r-7u-f1r">
-                            <connections>
-                                <segue destination="oc7-b3-F48" kind="show" id="Xq7-Oc-ufg"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="cart" id="94r-7u-f1r">
+                                <connections>
+                                    <segue destination="oc7-b3-F48" kind="show" id="Xq7-Oc-ufg"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="filter" id="hSf-KP-uet">
+                                <connections>
+                                    <action selector="filterAction:" destination="BYZ-38-t0r" id="kPq-zt-edU"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="oIE-wI-Vnh" id="bn0-tb-KIL"/>
+                        <outlet property="filterBarButton" destination="hSf-KP-uet" id="5e7-h8-Ulk"/>
                         <segue destination="yJO-eR-RXI" kind="show" identifier="CatalogDetailViewController" id="Tgc-4Z-CaV"/>
                     </connections>
                 </viewController>
@@ -423,7 +432,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SHy-eo-yH7">
                                                         <rect key="frame" x="0.0" y="0.0" width="304" height="30"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tamanhos disponiveis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEg-fa-SxM">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tamanhos disponíveis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEg-fa-SxM">
                                                                 <rect key="frame" x="0.0" y="0.0" width="304" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -445,10 +454,14 @@
                                                             <constraint firstAttribute="height" constant="22" id="qeb-nJ-evI"/>
                                                             <constraint firstAttribute="width" constant="26" id="sCK-au-FGx"/>
                                                         </constraints>
-                                                        <state key="normal" image="like"/>
+                                                        <state key="normal" image="likeOff"/>
+                                                        <state key="selected" image="likeOn"/>
+                                                        <connections>
+                                                            <action selector="likeProduct:" destination="yJO-eR-RXI" eventType="touchUpInside" id="exM-kJ-Isr"/>
+                                                        </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrE-FY-TGF">
-                                                        <rect key="frame" x="58" y="10" width="254" height="17"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrE-FY-TGF">
+                                                        <rect key="frame" x="58" y="18.5" width="254" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -545,7 +558,7 @@
                                 <rect key="frame" x="0.0" y="444" width="320" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJO-Qh-iCq">
-                                        <rect key="frame" x="110.5" y="10" width="201.5" height="40"/>
+                                        <rect key="frame" x="21" y="10" width="291" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="576-yU-7Q3"/>
@@ -571,13 +584,13 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="mdv-zv-dMF">
-                                        <rect key="frame" x="8" y="14" width="94.5" height="33"/>
+                                        <rect key="frame" x="8" y="14" width="5" height="33"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qno-EN-ZJS">
-                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="12"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="5" height="12"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="de R$190,00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ort-6n-YJL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="94.5" height="12"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ort-6n-YJL">
+                                                        <rect key="frame" x="0.0" y="0.0" width="5" height="12"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -585,10 +598,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ita-ms-lFh">
-                                                <rect key="frame" x="0.0" y="16" width="94.5" height="17"/>
+                                                <rect key="frame" x="0.0" y="16" width="5" height="17"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="por R$100,00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fm-b6-mBi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="94.5" height="17"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fm-b6-mBi">
+                                                        <rect key="frame" x="0.0" y="0.0" width="5" height="17"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -637,6 +650,7 @@
                         <outlet property="imageProduct" destination="BQh-ZJ-Dg7" id="DuX-iY-7sF"/>
                         <outlet property="likeHeightConstraint" destination="5vX-Y7-5qQ" id="F9A-L6-EN1"/>
                         <outlet property="likePopImageView" destination="FjR-uB-jiT" id="F1z-1i-Eci"/>
+                        <outlet property="likeProduct" destination="pur-9A-Mk7" id="tNY-wI-fPf"/>
                         <outlet property="likeWidthConstraint" destination="Uq5-fn-JVE" id="Qa6-Cy-7yE"/>
                         <outlet property="nameProduct" destination="lrE-FY-TGF" id="51E-P0-prz"/>
                         <outlet property="regularPrice" destination="Ort-6n-YJL" id="QGE-Bc-lRN"/>
@@ -670,8 +684,10 @@
     </scenes>
     <resources>
         <image name="cart" width="24" height="24"/>
+        <image name="filter" width="24" height="24"/>
         <image name="imgLikePop" width="173" height="150"/>
-        <image name="like" width="30" height="27"/>
+        <image name="likeOff" width="24" height="24"/>
+        <image name="likeOn" width="30" height="27"/>
         <image name="on_sale_tag" width="100" height="100"/>
         <image name="size_g" width="99" height="100"/>
     </resources>

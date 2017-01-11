@@ -16,7 +16,6 @@ class CartViewController: UIViewController {
         return CartModel(delegate: self)
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -38,6 +37,12 @@ class CartViewController: UIViewController {
 extension CartViewController : CartModelDelegate {
     func getProductsFromCart() {
         tableView.reloadData()
+        updateTotalChart()
+    }
+    
+    func updateTotalChart() {
+        model.getTotalFromChart()
+        total.text = DateFormatter.accurancyWithFraction(model.total)
     }
 }
 extension CartViewController : UITableViewDelegate {

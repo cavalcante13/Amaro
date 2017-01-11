@@ -10,6 +10,8 @@ import UIKit
 
 class CatalogViewController: UIViewController {
     @IBOutlet weak var collectionView : UICollectionView!
+    @IBOutlet weak var filterBarButton: UIBarButtonItem!
+    
     
     fileprivate lazy var searchBar : UISearchBar = {
         let searchBar = UISearchBar()
@@ -31,6 +33,20 @@ class CatalogViewController: UIViewController {
     }
     private func setup() {
         navigationItem.titleView = searchBar
+//        filterBarButton.imageInsets = UIEdgeInsetsMake(0.0, 20, 0, 0)
+    }
+    
+    @IBAction func filterAction(_ sender: Any) {
+        let alert = UIAlertController(title: "Ordenar por: ", message: nil, preferredStyle: .actionSheet)
+        let okAction = UIAlertAction(title: "Em promoção", style: .default, handler: {(action) in
+            self.model.searchProductOnSale()
+        })
+        let limparAction = UIAlertAction(title: "Limpar todos os filtros", style: .cancel, handler: {(action) in
+            self.model.getJson()
+        })
+        alert.addAction(okAction)
+        alert.addAction(limparAction)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 extension CatalogViewController : UISearchBarDelegate {

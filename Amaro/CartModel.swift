@@ -19,7 +19,7 @@ class CartModel: NSObject {
         return try! Realm()
     }()
     
-    
+    var total = 0.0
     var products : [Product] = [Product]()
     
     init(delegate : CartModelDelegate) {
@@ -37,7 +37,12 @@ class CartModel: NSObject {
     }
     
     func getTotalFromChart() {
-        
+        total = 0.0
+        products.forEach({(product) in
+            if let prices = product.actual_price?.components(separatedBy: "R$ ") {
+                total += NumberFormatter.stringToDouble(prices[1])
+            }
+        })
     }
     
     func removeProductFromChart(_ product : Product) {

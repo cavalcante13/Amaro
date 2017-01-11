@@ -31,11 +31,19 @@ class CatalogModel: NSObject {
             self.delegate?.model(jsonResponse: self, error: nil)
         }
     }
+    func searchProductOnSale() {
+        if !products.isEmpty {
+            let predicate = NSPredicate(format: "on_sale = %d", 1)
+            let result = (products as NSArray).filtered(using: predicate) as! [Product]
+            self.products.removeAll()
+            self.products = result
+            self.delegate?.model(jsonResponse: self, error: nil)
+        }
+    }
     func getJson() {
         CatalogService.getJson(resource: "products") { (result) -> (Void) in
             if let result = result as? NSDictionary {
                 if let products = result["products"] as? NSArray {
-//                    products.forEach({})
                     for product in products {
                         self.products.append(Convert.convertToProduct(product as! NSDictionary))
                     }

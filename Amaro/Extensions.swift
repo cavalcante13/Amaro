@@ -51,6 +51,25 @@ extension ReusableView where Self : UIView {
 extension UITableViewCell       : ReusableView{}
 extension UICollectionViewCell  : ReusableView{}
 
+extension DateFormatter {
+    class func accurancyWithFraction(_ number : Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencySymbol = "R$"
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale(identifier: "pt_BR")
+        return formatter.string(from: NSNumber(value: number))!
+    }
+    
+}
+extension NumberFormatter {
+    class func stringToDouble(_ string : String)-> Double {
+        let formatter = NumberFormatter()
+        formatter.decimalSeparator = ","
+        let grade = formatter.number(from: string)!
+        return grade.doubleValue
+    }
+}
 
 extension UIView {
     
